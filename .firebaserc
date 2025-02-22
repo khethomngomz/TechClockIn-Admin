@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "technicianclockinapp",
+    "tech-admin-app": "techclockin-admin"
+  },
+  "targets": {},
+  "etags": {}
+}
