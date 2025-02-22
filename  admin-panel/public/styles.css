@@ -1,6 +1,11 @@
 body {
   background: linear-gradient(to right, #003366, #008080);
   font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 h1,
@@ -10,10 +15,13 @@ h2 {
 
 .container {
   max-width: 600px;
-  background: #ffffff;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(#ffffff, rgb(119, 120, 120));
 }
 
 input {
