@@ -12,6 +12,9 @@ import {
   onSnapshot,
   setDoc,
   doc,
+  limit,
+  startAfter,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -28,6 +31,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+let lastVisible = null;
+const logsPerPage = 5;
 
 window.showAdminSignup = function () {
   document.getElementById("login").style.display = "none";
@@ -72,23 +78,71 @@ window.adminSignup = function () {
     });
 };
 
-function fetchLogs() {
+async function fetchLogs() {
   const logsBody = document.getElementById("logs-body");
   logsBody.innerHTML = "";
-  const logsQuery = query(collection(db, "logs"), orderBy("timestamp", "desc"));
+  const logsQuery = query(
+    collection(db, "logs"),
+    orderBy("timestamp", "desc"),
+    limit(logsPerPage)
+  );
 
-  onSnapshot(logsQuery, (snapshot) => {
-    logsBody.innerHTML = "";
-    snapshot.forEach((doc) => {
-      const log = doc.data();
-      const timestamp = log.timestamp?.toDate().toLocaleString() || "N/A";
-      logsBody.innerHTML += `
-        <tr>
-          <td>${log.userId}</td>
-          <td>${log.type}</td>
-          <td>${timestamp}</td>
-          <td>${log.location.latitude}, ${log.location.longitude}</td>
-        </tr>`;
-    });
+  const snapshot = await getDocs(logsQuery);
+  lastVisible = snapshot.docs[snapshot.docs.length - 1];
+
+  snapshot.forEach((doc) => {
+    appendLogToTable(doc.data());
   });
+
+  document.getElementById("see-more-container").style.display =
+    snapshot.docs.length < logsPerPage ? "none" : "block";
 }
+
+window.loadMoreLogs = async function () {
+  if (!lastVisible) return;
+
+  const logsQuery = query(
+    collection(db, "logs"),
+    orderBy("timestamp", "desc"),
+    startAfter(lastVisible),
+    limit(logsPerPage)
+  );
+
+  const snapshot = await getDocs(logsQuery);
+  lastVisible = snapshot.docs[snapshot.docs.length - 1];
+
+  snapshot.forEach((doc) => {
+    appendLogToTable(doc.data());
+  });
+
+  if (snapshot.docs.length < logsPerPage) {
+    document.getElementById("see-more-container").style.display = "none";
+  }
+};
+
+function appendLogToTable(log) {
+  const logsBody = document.getElementById("logs-body");
+  const timestamp = log.timestamp?.toDate().toLocaleString() || "N/A";
+  logsBody.innerHTML += `
+    <tr>
+      <td>${log.userId}</td>
+      <td>${log.type}</td>
+      <td>${timestamp}</td>
+      <td>${log.location.latitude}, ${log.location.longitude}</td>
+    </tr>`;
+}
+
+// Function to scroll back to the top
+window.scrollToTop = function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+// Show or hide the scroll-to-top button based on scroll position
+window.onscroll = function () {
+  const scrollButton = document.getElementById("scroll-top-btn");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    scrollButton.style.display = "block";
+  } else {
+    scrollButton.style.display = "none";
+  }
+};
