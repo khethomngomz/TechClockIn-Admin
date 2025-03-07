@@ -1,29 +1,36 @@
+/* Background and General Layout */
 body {
   background: linear-gradient(to right, #003366, #008080);
   font-family: Arial, sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
+  flex-direction: column;
 }
 
+/* Headings */
 h1,
 h2 {
   color: #343a40;
+  text-align: center;
 }
 
+/* Main Container */
 .container {
-  max-width: 600px;
+  max-width: 600px; /* Fixed width for consistency */
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background: linear-gradient(#ffffff, rgb(119, 120, 120));
+  overflow: hidden; /* Ensures content fits inside */
 }
 
+/* Input Fields */
 input {
   width: 100%;
   padding: 10px;
@@ -32,6 +39,7 @@ input {
   border-radius: 5px;
 }
 
+/* Buttons */
 button {
   width: 100%;
   padding: 10px;
@@ -40,19 +48,26 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-/* General Table Styles */
+/* Table Styles */
+.table-wrapper {
+  width: 100%;
+  overflow: hidden; /* Ensures table stays inside the container */
+}
+
 table {
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 5px;
-  width: 100%; /* Ensure the table fits within the screen */
+  width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Forces the table to fit inside the container */
 }
 
 table th,
@@ -60,42 +75,60 @@ table td {
   text-align: center;
   padding: 8px;
   border: 1px solid #dee2e6;
-  word-wrap: break-word; /* Break long content into multiple lines */
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." for long content */
+  white-space: normal; /* Allows text to wrap */
 }
 
+/* Table Header */
 table th {
   background-color: #007bff;
   color: white;
 }
 
-/* Responsive Design for Smaller Screens */
-@media (max-width: 600px) {
-  table {
-    display: block;
-    overflow-x: auto; /* Enable horizontal scrolling */
+/* Responsive Table: Ensure It Fits Inside Container */
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    padding: 15px;
   }
 
-  th,
-  td {
-    font-size: 12px; /* Reduce font size for narrow screens */
+  table th,
+  table td {
+    font-size: 14px;
     padding: 6px;
   }
 }
 
-@media (max-width: 400px) {
-  table {
-    width: 100%; /* Ensure the table doesn't overflow */
-  }
-
+/* Mobile View Adjustments */
+@media (max-width: 500px) {
   th,
   td {
-    font-size: 10px; /* Further reduce font size */
+    font-size: 12px;
     padding: 4px;
-    word-break: break-word; /* Force-breaking long words to fit */
   }
+}
 
-  th,
-  td {
-    text-align: left; /* Align text to the left for readability */
-  }
+/* Scroll-to-Top Button */
+#scroll-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#scroll-top-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
 }

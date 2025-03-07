@@ -30,24 +30,28 @@
         Already have an account? <a href="#" onclick="showAdminLogin()">Login</a>
       </p>
     </div>
-    
-    <table id="logs-table" class="table table-bordered mt-4" style="display: none;">
-      <thead>
-        <tr>
-          <th>Technician</th>
-          <th>Event</th>
-          <th>Timestamp</th>
-          <th>Location</th>
-        </tr>
-      </thead>
-      <tbody id="logs-body"></tbody>
-    </table>
 
-    <!-- "See More" button for pagination -->
+    <div class="table-wrapper">
+      <table id="logs-table" class="table table-bordered mt-4" style="display: none;">
+        <thead>
+          <tr>
+            <th>Technician</th>
+            <th>Event</th>
+            <th>Timestamp</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody id="logs-body"></tbody>
+      </table>
+    </div>
+
     <div class="text-center mt-3" id="see-more-container" style="display: none;">
       <button class="btn btn-secondary" onclick="loadMoreLogs()">See More</button>
     </div>
   </div>
+
+  <!-- Scroll-to-Top Button (Initially Hidden) -->
+  <button id="scroll-top-btn" onclick="scrollToTop()" style="display: none;">⬆</button>
 
   <script type="module" src="admin.js"></script>
 </body>

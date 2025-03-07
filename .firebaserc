@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "technicianclockinapp",
+    "default": "techclockin-admin",
     "tech-admin-app": "techclockin-admin"
   },
   "targets": {},

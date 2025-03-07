@@ -132,12 +132,11 @@ function appendLogToTable(log) {
     </tr>`;
 }
 
-// Function to scroll back to the top
+// Scroll to Top Button Functionality
 window.scrollToTop = function () {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-// Show or hide the scroll-to-top button based on scroll position
 window.onscroll = function () {
   const scrollButton = document.getElementById("scroll-top-btn");
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
