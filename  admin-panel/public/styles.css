@@ -26,7 +26,7 @@ h2 {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(#ffffff, rgb(119, 120, 120));
+  background: linear-gradient(#a2a1a1, rgb(119, 120, 120));
   overflow: hidden; /* Ensures content fits inside */
 }
 
@@ -119,7 +119,7 @@ table th {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #007bff;
+  background: linear-gradient(#007bff, #032d5a);
   color: white;
   border: none;
   font-size: 18px;
@@ -131,4 +131,12 @@ table th {
 #scroll-top-btn:hover {
   background-color: #0056b3;
   transform: scale(1.1);
+}
+
+.btn-secondary {
+  background: linear-gradient(#056031, #41b662);
+}
+
+.btn-primary {
+  background: linear-gradient(#053c60, #4e809d);
 }
