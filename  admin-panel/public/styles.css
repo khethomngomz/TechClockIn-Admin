@@ -46,20 +46,21 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* General Table Styles */
 table {
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 5px;
-  overflow: hidden;
-  width: 100%; /* Ensure the table takes up the full width of its container */
+  width: 100%; /* Ensure the table fits within the screen */
+  border-collapse: collapse;
 }
 
 table th,
 table td {
   text-align: center;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #dee2e6;
-  word-wrap: break-word; /* Allow content to break into the next line */
+  word-wrap: break-word; /* Break long content into multiple lines */
 }
 
 table th {
@@ -67,15 +68,34 @@ table th {
   color: white;
 }
 
+/* Responsive Design for Smaller Screens */
 @media (max-width: 600px) {
   table {
     display: block;
-    overflow-x: auto; /* Add horizontal scrolling for very small screens */
+    overflow-x: auto; /* Enable horizontal scrolling */
   }
 
   th,
   td {
-    font-size: 12px; /* Reduce font size for better fit */
-    padding: 8px; /* Adjust padding to save space */
+    font-size: 12px; /* Reduce font size for narrow screens */
+    padding: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  table {
+    width: 100%; /* Ensure the table doesn't overflow */
+  }
+
+  th,
+  td {
+    font-size: 10px; /* Further reduce font size */
+    padding: 4px;
+    word-break: break-word; /* Force-breaking long words to fit */
+  }
+
+  th,
+  td {
+    text-align: left; /* Align text to the left for readability */
   }
 }
